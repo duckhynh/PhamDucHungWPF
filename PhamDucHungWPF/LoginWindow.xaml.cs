@@ -51,16 +51,22 @@ namespace PhamDucHungWPF
 
             if (email == adminEmail && password == adminPassword)
             {
-                MessageBox.Show("Welcome Admin!");
-                // Mở màn hình quản lý admin
+                ProductWindow productWindow = new ProductWindow();
+                productWindow.Show();
+                this.Close();
                 return;
             }
 
             // Kiểm tra login thường
             if (_accountService.Login(email, password))
             {
-                MessageBox.Show("Login successful!");
-                // Mở giao diện khách hàng
+
+                // Mở ProductWindow
+                ProductWindow productWindow = new ProductWindow();
+                productWindow.Show();
+
+                // Đóng cửa sổ đăng nhập
+                this.Close();
             }
             else
             {
