@@ -12,7 +12,7 @@ namespace DAL.Repositories
         private readonly FuminiTikiSystemContext _context = new();
         public Customer? GetByEmail(string email) =>
         _context.Customers.FirstOrDefault(c => c.Email == email);
-
+        
         public void Add(Customer customer)
         {
             _context.Customers.Add(customer);

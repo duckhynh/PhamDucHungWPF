@@ -17,6 +17,7 @@ namespace BAL
             var customer = _repo.GetByEmail(email);
             return customer != null && customer.Password == password;
         }
+        
 
         public bool Register(string name, string email, string password, out string message)
         {

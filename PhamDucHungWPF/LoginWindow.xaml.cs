@@ -1,4 +1,5 @@
 ﻿using BAL;
+using DAL.Models;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -61,12 +62,17 @@ namespace PhamDucHungWPF
             if (_accountService.Login(email, password))
             {
 
-                // Mở ProductWindow
-                ProductWindow productWindow = new ProductWindow();
-                productWindow.Show();
-
-                // Đóng cửa sổ đăng nhập
-                this.Close();
+                var customer = _accountService.GetByEmail(email);
+                if (customer != null)
+                {
+                    OrderWindow win = new OrderWindow(customer.CustomerId);
+                    win.Show();
+                    this.Close(); // Đóng login window nếu muốn
+                }
+                else
+                {
+                    MessageBox.Show("Lỗi khi lấy thông tin khách hàng!");
+                }
             }
             else
             {
