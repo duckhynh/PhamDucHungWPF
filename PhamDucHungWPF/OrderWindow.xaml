@@ -5,32 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PhamDucHungWPF"
         mc:Ignorable="d"
-        Title="OrderWindow" Height="450" Width="800">
-    <Grid Margin="10">
+        Title="Order Management"
+        Height="550" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#F9FAFB">
+
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Product " FontWeight="Bold" Grid.Row="0" />
+        <!-- Title -->
+        <TextBlock Text="Available Products" FontWeight="Bold" FontSize="18" Margin="0,0,0,10"/>
 
-        <ListBox x:Name="listBoxProducts" Grid.Row="1" SelectionMode="Multiple" />
+        <!-- Product List -->
+        <ListBox x:Name="listBoxProducts"
+                 Grid.Row="1"
+                 SelectionMode="Multiple"
+                 Background="White"
+                 BorderBrush="#D1D5DB"
+                 BorderThickness="1"
+                 Padding="10"
+                 FontSize="14"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"/>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
-            <Button x:Name="btnPlaceOrder" Content="Order" Width="100" Click="btnPlaceOrder_Click"/>
-            <Button x:Name="btnViewOrders" Content="View Orders" Width="120" Margin="10,0,0,0" Click="btnViewOrders_Click"/>
+        <!-- Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,15,0,10">
+            <Button x:Name="btnPlaceOrder"
+                    Content="Place Order"
+                    Width="120" Height="35"
+                    Background="#10B981" Foreground="White"
+                    FontWeight="SemiBold" Margin="5"
+                    Click="btnPlaceOrder_Click"/>
+            <Button x:Name="btnViewOrders"
+                    Content="View Orders"
+                    Width="120" Height="35"
+                    Background="#3B82F6" Foreground="White"
+                    FontWeight="SemiBold" Margin="5"
+                    Click="btnViewOrders_Click"/>
         </StackPanel>
 
-        <ListBox x:Name="listBoxOrders" Grid.Row="3" Margin="0,10,0,0" SelectionChanged="listBoxOrders_SelectionChanged">
+        <!-- Order List -->
+        <ListBox x:Name="listBoxOrders"
+                 Grid.Row="3" Margin="0,0,0,0"
+                 Background="White"
+                 BorderBrush="#D1D5DB" BorderThickness="1"
+                 Padding="10"
+                 FontSize="14"
+                 SelectionChanged="listBoxOrders_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="6" Padding="6" Margin="4" Background="WhiteSmoke">
+                    <Border BorderBrush="#E5E7EB" BorderThickness="1" Padding="10" Margin="0,0,0,10" Background="White">
                         <StackPanel>
-                            <TextBlock Text="{Binding OrderId, StringFormat='Đơn hàng #{0}'}" FontWeight="Bold" FontSize="14" />
-                            <TextBlock Text="{Binding OrderDate, StringFormat='Ngày đặt: {0:dd/MM/yyyy}'}" />
-                            <TextBlock Text="{Binding OrderAmount, StringFormat='Tổng tiền: {0:N0}đ'}" Foreground="DarkGreen" />
+                            <TextBlock Text="{Binding OrderId, StringFormat='Order #{0}'}" FontWeight="Bold" FontSize="15"/>
+                            <TextBlock Text="{Binding OrderDate, StringFormat='Date: {0:dd/MM/yyyy}'}" Foreground="#6B7280"/>
+                            <TextBlock Text="{Binding OrderAmount, StringFormat='Total: {0:N0}đ'}" Foreground="#16A34A"/>
                         </StackPanel>
                     </Border>
                 </DataTemplate>

@@ -2,9 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Product Management"
-        Height="650" Width="950"
+        Height="660" Width="1157"
         WindowStartupLocation="CenterScreen"
-        Background="#F5F7FA">
+        Background="White">
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -16,20 +16,27 @@
         <!-- 🔍 Search Panel -->
         <StackPanel Orientation="Horizontal" Margin="0,0,0,15" HorizontalAlignment="Left">
             <TextBox x:Name="txtSearch"
-                     Width="200" Height="30"
+                     Width="200" Height="32"
                      Margin="0,0,10,0"
                      VerticalContentAlignment="Center"
-                     
+                     FontSize="14"
+                     Background="#F1F5F9" BorderBrush="#D1D5DB" BorderThickness="1"
+                     Padding="10,0"
                      TextChanged="txtSearch_TextChanged"/>
 
             <ComboBox x:Name="cbCategory"
-                      Width="200" Height="30"
+                      Width="200" Height="32"
                       Margin="0,0,10,0"
+                      FontSize="14"
+                      Background="#F1F5F9" BorderBrush="#D1D5DB" BorderThickness="1"
                       DisplayMemberPath="Name"
                       SelectedValuePath="CategoryId"/>
 
             <Button Content="Search"
-                    Width="100" Height="30"
+                    Width="100" Height="32"
+                    Background="#3B82F6" Foreground="White"
+                    BorderBrush="#3B82F6" FontWeight="SemiBold"
+                    Cursor="Hand"
                     Click="BtnSearch_Click"/>
         </StackPanel>
 
@@ -43,23 +50,20 @@
             <!-- 🔧 Input Form -->
             <StackPanel Margin="0,0,20,0">
                 <TextBlock Text="Product Name:" FontWeight="Bold"/>
-                <TextBox x:Name="txtName" Margin="0,5,0,10"/>
+                <TextBox x:Name="txtName" Margin="0,5,0,10" Background="#F9FAFB" BorderBrush="#D1D5DB"/>
 
                 <TextBlock Text="Price:" FontWeight="Bold"/>
-                <TextBox x:Name="txtPrice" Margin="0,5,0,10"/>
+                <TextBox x:Name="txtPrice" Margin="0,5,0,10" Background="#F9FAFB" BorderBrush="#D1D5DB"/>
 
                 <TextBlock Text="Description:" FontWeight="Bold"/>
-                <TextBox x:Name="txtDescription"
-                         Height="60"
-                         TextWrapping="Wrap"
-                         AcceptsReturn="True"
-                         Margin="0,5,0,10"/>
+                <TextBox x:Name="txtDescription" Height="60" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5,0,10" Background="#F9FAFB" BorderBrush="#D1D5DB"/>
 
                 <TextBlock Text="Category:" FontWeight="Bold"/>
                 <ComboBox x:Name="cbFormCategory"
                           DisplayMemberPath="Name"
                           SelectedValuePath="CategoryId"
-                          Margin="0,5,0,10"/>
+                          Margin="0,5,0,10"
+                          Background="#F9FAFB" BorderBrush="#D1D5DB"/>
 
                 <TextBlock Text="Category Image:" FontWeight="Bold"/>
                 <Image x:Name="imgCategory"
@@ -68,28 +72,21 @@
                        Stretch="UniformToFill"
                        HorizontalAlignment="Left"/>
 
-
-
                 <!-- Actions -->
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <Button Content="Add"
-                            Width="80" Margin="5"
-                            Click="BtnAdd_Click"/>
-                    <Button Content="Update"
-                            Width="80" Margin="5"
-                            Click="BtnEdit_Click"/>
-                    <Button Content="Clear"
-                            Width="80" Margin="5"
-                            Click="BtnClear_Click"/>
+                    <Button Content="Add" Width="80" Margin="5" Click="BtnAdd_Click"
+                            Background="#10B981" Foreground="White" FontWeight="SemiBold"/>
+                    <Button Content="Update" Width="80" Margin="5" Click="BtnEdit_Click"
+                            Background="#F59E0B" Foreground="White" FontWeight="SemiBold"/>
+                    <Button Content="Clear" Width="80" Margin="5" Click="BtnClear_Click"
+                            Background="#6B7280" Foreground="White" FontWeight="SemiBold"/>
                 </StackPanel>
             </StackPanel>
 
             <!-- 📋 Product List -->
-            <ListView x:Name="lvProducts"
-                      Grid.Column="1"
-                      Margin="0"
-                      SelectionMode="Single"
-                      SelectionChanged="lvProducts_SelectionChanged">
+            <ListView x:Name="lvProducts" Grid.Column="1" Margin="0,0,29,0"
+                      SelectionMode="Single" SelectionChanged="lvProducts_SelectionChanged"
+                      BorderBrush="#D1D5DB" BorderThickness="1">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding ProductId}"/>
@@ -103,17 +100,15 @@
         </Grid>
 
         <!-- 🚮 Bottom Buttons -->
-        <StackPanel Grid.Row="2"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right"
-                    Margin="0,20,0,0">
-            <Button Content="Delete"
-                    Width="100" Margin="5"
-                    Click="BtnDelete_Click"/>
-            <Button Content="Refresh"
-                    Width="100" Margin="5"
-                    Click="BtnRefresh_Click"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Content="Delete" Width="100" Margin="5" Click="BtnDelete_Click"
+                    Background="#EF4444" Foreground="White" FontWeight="SemiBold"/>
+            <Button Content="Refresh" Width="100" Margin="5" Click="BtnRefresh_Click"
+                    Background="#6366F1" Foreground="White" FontWeight="SemiBold"/>
         </StackPanel>
-        <Button Content="Category" HorizontalAlignment="Left" Margin="525,0,0,0" VerticalAlignment="Top" Height="30" Width="111" Click="Button_Click"/>
+
+        <!-- 🔁 Category Navigation -->
+        <Button Content="Category" HorizontalAlignment="Left" Margin="525,0,0,0" VerticalAlignment="Top" Height="30" Width="111" Click="Button_Click"
+                Background="#E0E7FF" Foreground="#1E3A8A" FontWeight="Bold"/>
     </Grid>
 </Window>

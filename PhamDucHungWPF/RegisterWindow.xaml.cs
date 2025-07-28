@@ -108,5 +108,10 @@ namespace PhamDucHungWPF
             new LoginWindow().Show();
             this.Close();
         }
+
+        private void txtName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

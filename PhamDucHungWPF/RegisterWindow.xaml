@@ -1,29 +1,113 @@
 ﻿<Window x:Class="PhamDucHungWPF.RegisterWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Register" Height="400" Width="400"
-        WindowStartupLocation="CenterScreen">
-    <Grid Background="#f0f0f0">
-        <Border Background="White" Padding="20" CornerRadius="10"
-                VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-            <StackPanel>
-                <TextBlock Text="Register" FontSize="22" FontWeight="Bold"
-                           HorizontalAlignment="Center" Margin="0,0,0,20"/>
+        Title="Register" Height="515" Width="400"
+        WindowStartupLocation="CenterScreen"
+        Background="#f0f0f0">
+    <Grid>
+        <!-- Style để làm nút bo góc -->
+        <Grid.Resources>
+            <Style x:Key="RoundedButton" TargetType="Button">
+                <Setter Property="Background" Value="#3B82F6"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Padding" Value="10,5"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                    CornerRadius="10"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
-                <TextBlock Text="Full Name:"/>
-                <TextBox x:Name="txtName" Margin="0,5"/>
+            <!-- Style cho nút trắng bo nhẹ -->
+            <Style x:Key="BackButton" TargetType="Button" BasedOn="{StaticResource RoundedButton}">
+                <Setter Property="Background" Value="#EEEEEE"/>
+                <Setter Property="Foreground" Value="#333"/>
+                <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            </Style>
+        </Grid.Resources>
+
+        <Border Background="White"
+                Padding="20"
+                CornerRadius="15"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Width="320">
+            <StackPanel>
+                <TextBlock Text="🔐 Register"
+               FontSize="24"
+               FontWeight="Bold"
+               Foreground="#3B82F6"
+               HorizontalAlignment="Center"
+               Margin="0,0,0,25"/>
+
+                <!-- FULL NAME -->
+                <TextBlock Text="Full Name:" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                <Border CornerRadius="8"
+        Background="#F9FAFB"
+        BorderBrush="#D1D5DB"
+        BorderThickness="1"
+        Margin="0,0,0,10">
+                    <TextBox x:Name="txtName"
+             Background="Transparent"
+             BorderThickness="0"
+             Padding="10"
+             Height="35"
+             TextChanged="txtName_TextChanged"/>
+                </Border>
                 <TextBlock x:Name="txtNameError" Foreground="Red" FontSize="12"/>
 
-                <TextBlock Text="Email:"/>
-                <TextBox x:Name="txtEmail" Margin="0,5"/>
+                <!-- EMAIL -->
+                <TextBlock Text="Email:" FontWeight="SemiBold" Margin="0,10,0,5"/>
+                <Border CornerRadius="8"
+        Background="#F9FAFB"
+        BorderBrush="#D1D5DB"
+        BorderThickness="1"
+        Margin="0,0,0,10">
+                    <TextBox x:Name="txtEmail"
+             Background="Transparent"
+             BorderThickness="0"
+             Padding="10"
+             Height="35"/>
+                </Border>
                 <TextBlock x:Name="txtEmailError" Foreground="Red" FontSize="12"/>
 
-                <TextBlock Text="Password:"/>
-                <PasswordBox x:Name="txtPassword" Margin="0,5"/>
+                <!-- PASSWORD -->
+                <TextBlock Text="Password:" FontWeight="SemiBold" Margin="0,10,0,5"/>
+                <Border CornerRadius="8"
+        Background="#F9FAFB"
+        BorderBrush="#D1D5DB"
+        BorderThickness="1"
+        Margin="0,0,0,10">
+                    <PasswordBox x:Name="txtPassword"
+                 Background="Transparent"
+                 BorderThickness="0"
+                 Padding="10"
+                 Height="35"/>
+                </Border>
                 <TextBlock x:Name="txtPasswordError" Foreground="Red" FontSize="12"/>
 
-                <Button Content="Register" Margin="0,20,0,10" Click="BtnRegister_Click"/>
-                <Button Content="Back to Login" Click="BtnBack_Click"/>
+
+                <!-- 🔥 Button bo góc -->
+                <Button Content="Register"
+                        Style="{StaticResource RoundedButton}"
+                        Margin="0,20,0,10"
+                        Click="BtnRegister_Click"
+                        Height="40"/>
+
+                <Button Content="← Back to Login"
+                        Style="{StaticResource BackButton}"
+                        Click="BtnBack_Click"
+                        Height="35"/>
             </StackPanel>
         </Border>
     </Grid>
