@@ -33,13 +33,19 @@ namespace DAL.Repositories
 
         public void Delete(int categoryId)
         {
-            var category = _context.Categories.Find(categoryId);
-            if (category != null)
-            {
-                _context.Categories.Remove(category);
-                _context.SaveChanges();
-            }
+            
+            
+                var category = _context.Categories.Find(categoryId);
+                if (category != null)
+                {
+                    _context.Categories.Remove(category);
+                    _context.SaveChanges();
+                }
+            
+            
         }
+            
+        
     }
 
 }

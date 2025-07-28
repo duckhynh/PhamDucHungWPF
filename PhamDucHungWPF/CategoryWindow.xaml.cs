@@ -69,7 +69,7 @@ namespace PhamDucHungWPF
                 return;
             }
 
-          
+
             var result = MessageBox.Show(
                 $"Are you sure you want to delete the category \"{_selectedCategory.Name}\"?",
                 "Confirm Delete",
@@ -78,9 +78,16 @@ namespace PhamDucHungWPF
 
             if (result != MessageBoxResult.Yes) return;
 
-            _service.Delete(_selectedCategory.CategoryId);
-            LoadCategories();
-            ClearFields();
+            try
+            {
+                _service.Delete(_selectedCategory.CategoryId);
+                LoadCategories();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("can not delele :may be this category have conection with product");
+            }
         }
 
 
