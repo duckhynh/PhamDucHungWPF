@@ -114,5 +114,6 @@
                     Width="100" Margin="5"
                     Click="BtnRefresh_Click"/>
         </StackPanel>
+        <Button Content="Category" HorizontalAlignment="Left" Margin="525,0,0,0" VerticalAlignment="Top" Height="30" Width="111" Click="Button_Click"/>
     </Grid>
 </Window>

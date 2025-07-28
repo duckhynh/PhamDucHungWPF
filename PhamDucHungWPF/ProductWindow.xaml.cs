@@ -211,5 +211,12 @@ namespace PhamDucHungWPF
             }
             return true;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var CategoryWindow = new CategoryWindow();
+                CategoryWindow.Show();
+                this.Close();
+        }
     }
 }
