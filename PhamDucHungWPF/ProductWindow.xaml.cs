@@ -124,6 +124,15 @@ namespace PhamDucHungWPF
                 return;
             }
 
+            // Thêm confirm trước khi xóa
+            var result = MessageBox.Show(
+                $"Are you sure you want to delete the product \"{_selectedProduct.Name}\"?",
+                "Confirm Delete",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (result != MessageBoxResult.Yes) return;
+
             using var context = GetDbContext();
             var product = context.Products.Find(_selectedProduct.ProductId);
             if (product != null)
@@ -134,6 +143,7 @@ namespace PhamDucHungWPF
                 ClearForm();
             }
         }
+
 
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
         {

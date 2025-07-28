@@ -63,12 +63,26 @@ namespace PhamDucHungWPF
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (_selectedCategory == null) return;
+            if (_selectedCategory == null)
+            {
+                MessageBox.Show("Please select a category to delete.");
+                return;
+            }
+
+          
+            var result = MessageBox.Show(
+                $"Are you sure you want to delete the category \"{_selectedCategory.Name}\"?",
+                "Confirm Delete",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (result != MessageBoxResult.Yes) return;
 
             _service.Delete(_selectedCategory.CategoryId);
             LoadCategories();
             ClearFields();
         }
+
 
         private void dgCategories_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {

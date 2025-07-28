@@ -16,9 +16,11 @@
 
                 <TextBlock Text="Email:"/>
                 <TextBox x:Name="txtEmail" Margin="0,5" />
+                <TextBlock x:Name="txtEmailError" Foreground="Red" FontSize="12" />
 
                 <TextBlock Text="Password:"/>
                 <PasswordBox x:Name="txtPassword" Margin="0,5" />
+                <TextBlock x:Name="txtPasswordError" Foreground="Red" FontSize="12" />
 
                 <Button Content="Login" Margin="0,20,0,10" Click="BtnLogin_Click"/>
                 <Button Content="Register" Click="BtnRegister_Click"/>

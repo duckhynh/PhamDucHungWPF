@@ -34,9 +34,51 @@ namespace PhamDucHungWPF
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
-            string name = txtName.Text;
-            string email = txtEmail.Text;
+            string name = txtName.Text.Trim();
+            string email = txtEmail.Text.Trim();
             string password = txtPassword.Password;
+
+            // Clear lỗi cũ
+            txtNameError.Text = "";
+            txtEmailError.Text = "";
+            txtPasswordError.Text = "";
+
+            bool hasError = false;
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                txtNameError.Text = "Full name is required.";
+                hasError = true;
+            }
+            else if (!IsValidFullName(name))
+            {
+                txtNameError.Text = "Name must be like 'Nguyen Van A'";
+                hasError = true;
+            }
+
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                txtEmailError.Text = "Email is required.";
+                hasError = true;
+            }
+            else if (!IsValidEmail(email))
+            {
+                txtEmailError.Text = "Invalid email format.";
+                hasError = true;
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                txtPasswordError.Text = "Password is required.";
+                hasError = true;
+            }
+            else if (password.Length < 6)
+            {
+                txtPasswordError.Text = "Password must be at least 6 characters.";
+                hasError = true;
+            }
+
+            if (hasError) return;
 
             if (_accountService.Register(name, email, password, out string message))
             {
@@ -46,8 +88,19 @@ namespace PhamDucHungWPF
             }
             else
             {
-                MessageBox.Show(message, "Error");
+                txtEmailError.Text = message;
             }
+        }
+
+        private bool IsValidFullName(string name)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(name, @"^[A-Z][a-z]+(?:\s[A-Z][a-z]+)+$");
+        }
+
+
+        private bool IsValidEmail(string email)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(email, @"^\S+@\S+\.\S+$");
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)

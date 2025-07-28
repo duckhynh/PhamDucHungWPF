@@ -38,8 +38,33 @@ namespace PhamDucHungWPF
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            string email = txtEmail.Text;
+            string email = txtEmail.Text.Trim();
             string password = txtPassword.Password;
+
+            // Clear error messages
+            txtEmailError.Text = "";
+            txtPasswordError.Text = "";
+
+            bool hasError = false;
+
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                txtEmailError.Text = "Email is required.";
+                hasError = true;
+            }
+            else if (!IsValidEmail(email))
+            {
+                txtEmailError.Text = "Invalid email format.";
+                hasError = true;
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                txtPasswordError.Text = "Password is required.";
+                hasError = true;
+            }
+
+            if (hasError) return;
 
             // Load Admin info from appsettings.json
             var config = new ConfigurationBuilder()
@@ -58,26 +83,32 @@ namespace PhamDucHungWPF
                 return;
             }
 
-            // Kiểm tra login thường
+            // Check login thường
             if (_accountService.Login(email, password))
             {
-
                 var customer = _accountService.GetByEmail(email);
                 if (customer != null)
                 {
                     OrderWindow win = new OrderWindow(customer.CustomerId);
                     win.Show();
-                    this.Close(); // Đóng login window nếu muốn
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Lỗi khi lấy thông tin khách hàng!");
+                    txtEmailError.Text = "Error retrieving account data.";
                 }
             }
             else
             {
-                MessageBox.Show("Invalid email or password.");
+                txtPasswordError.Text = "Invalid email or password.";
             }
         }
+
+
+        private bool IsValidEmail(string email)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(email, @"^\S+@\S+\.\S+$");
+        }
+
     }
 }
